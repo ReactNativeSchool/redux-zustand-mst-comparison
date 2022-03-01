@@ -2,22 +2,13 @@ import {
   View,
   Text,
   Image,
-  StyleSheet,
   ScrollView,
   SafeAreaView,
   Button,
 } from "react-native";
-import { useCart } from "./store";
 
-const styles = StyleSheet.create({
-  card: { paddingHorizontal: 20 },
-  image: { width: undefined, height: 300 },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-});
+import styles from "../styles";
+import { useCart } from "./store";
 
 export const Products = () => {
   const { addToCart, removeFromCart, cart, products } = useCart();

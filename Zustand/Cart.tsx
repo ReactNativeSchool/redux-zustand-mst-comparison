@@ -1,26 +1,7 @@
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  Button,
-  StyleSheet,
-} from "react-native";
+import { View, Text, Image, ScrollView, Button } from "react-native";
 
+import styles from "../styles";
 import { useCart } from "./store";
-
-const styles = StyleSheet.create({
-  row: { flexDirection: "row", paddingHorizontal: 20, paddingVertical: 10 },
-  image: {
-    width: 100,
-    height: 100,
-  },
-  content: {
-    flex: 1,
-    alignItems: "flex-end",
-    justifyContent: "center",
-  },
-});
 
 export const Cart = () => {
   const { cart, products, removeFromCart } = useCart();
@@ -30,10 +11,10 @@ export const Cart = () => {
   return (
     <ScrollView>
       {productsInCart.map((product) => (
-        <View key={product.sku} style={styles.row}>
+        <View key={product.sku} style={styles.cartRow}>
           <Image
             source={{ uri: product.image }}
-            style={styles.image}
+            style={styles.cartImage}
             resizeMode="contain"
           />
           <View style={styles.content}>

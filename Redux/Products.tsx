@@ -2,28 +2,18 @@ import {
   View,
   Text,
   Image,
-  StyleSheet,
   ScrollView,
   SafeAreaView,
   Button,
 } from "react-native";
 
+import styles from "../styles";
 import {
   useAppSelector,
   addToCart,
   removeFromCart,
   useAppDispatch,
 } from "./store";
-
-const styles = StyleSheet.create({
-  card: { paddingHorizontal: 20 },
-  image: { width: undefined, height: 300 },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-});
 
 export const Products = () => {
   const products = useAppSelector((state) => state.cart.products);
