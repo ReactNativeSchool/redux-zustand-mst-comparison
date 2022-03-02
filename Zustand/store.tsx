@@ -10,9 +10,11 @@ type CartState = {
 };
 
 // Selectors
+// Allows us to easily select a single piece of data later
 export const selectProductsInCart = (state: CartState) =>
   state.products.filter((product) => state.cart[product.sku]);
 
+// Initialize our store with initial values and actions to mutate the state
 export const useCart = create<CartState>((set) => ({
   products: [
     {

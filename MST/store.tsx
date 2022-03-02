@@ -6,11 +6,13 @@ const Product = types.model({
   image: types.string,
 });
 
+// Model and type our data with mobx state tree
 const CartStore = types
   .model("CartStore", {
     products: types.array(Product),
     cart: types.map(types.number),
   })
+  // Actions to mutate the state
   .actions((store) => ({
     addToCart(sku: string) {
       store.cart.set(sku, 1);
@@ -19,6 +21,7 @@ const CartStore = types
       store.cart.delete(sku);
     },
   }))
+  // Views are like selectors
   .views((self) => ({
     get productsInCart() {
       return self.products.filter((product) => self.cart.get(product.sku));
@@ -27,6 +30,7 @@ const CartStore = types
 
 type CartStoreType = Instance<typeof CartStore>;
 
+// Spin up a hook to use our store and provide initial values to it
 let _cartStore: CartStoreType;
 export const useCart = () => {
   if (!_cartStore) {

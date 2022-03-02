@@ -2,6 +2,7 @@ import { createSlice, configureStore, PayloadAction } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 // Slices
+// Definee the shape of the state and how to mutate it
 type ICart = { [sku: string]: number };
 const cartInitialState: ICart = {};
 const cartSlice = createSlice({
@@ -50,9 +51,11 @@ const productsSlice = createSlice({
 });
 
 // Actions
+// Export actions to be used in components
 export const { addToCart, removeFromCart } = cartSlice.actions;
 
 // Selectors
+// Export selectors to grab data in components
 export const selectProductsInCart = (state: RootState) =>
   state.products.filter((product) => state.cart[product.sku]);
 
@@ -65,7 +68,7 @@ export const store = configureStore({
 });
 
 // Hooks
-
+// This is here because we're using TypeScript
 type RootState = ReturnType<typeof store.getState>;
 type AppDispatch = typeof store.dispatch;
 
