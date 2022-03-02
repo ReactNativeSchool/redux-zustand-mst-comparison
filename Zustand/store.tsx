@@ -9,6 +9,10 @@ type CartState = {
   removeFromCart: (sku: string) => void;
 };
 
+// Selectors
+export const selectProductsInCart = (state: CartState) =>
+  state.products.filter((product) => state.cart[product.sku]);
+
 export const useCart = create<CartState>((set) => ({
   products: [
     {

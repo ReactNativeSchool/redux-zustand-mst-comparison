@@ -32,6 +32,7 @@ const initialState: CartState = {
   cart: {},
 };
 
+// Slice
 const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -50,13 +51,21 @@ const cartSlice = createSlice({
   },
 });
 
+// Actions
 export const { addToCart, removeFromCart } = cartSlice.actions;
 
+// Selectors
+export const selectProductsInCart = (state: RootState) =>
+  state.cart.products.filter((product) => state.cart.cart[product.sku]);
+
+// Store
 export const store = configureStore({
   reducer: {
     cart: cartSlice.reducer,
   },
 });
+
+// Hooks
 
 type RootState = ReturnType<typeof store.getState>;
 type AppDispatch = typeof store.dispatch;

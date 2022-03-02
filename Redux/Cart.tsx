@@ -1,14 +1,16 @@
 import { ScrollView } from "react-native";
 
 import { CartRow } from "../shared/CartRow";
-import { useAppSelector, removeFromCart, useAppDispatch } from "./store";
+import {
+  useAppSelector,
+  removeFromCart,
+  useAppDispatch,
+  selectProductsInCart,
+} from "./store";
 
 export const Cart = () => {
-  const products = useAppSelector((state) => state.cart.products);
-  const cart = useAppSelector((state) => state.cart.cart);
   const dispatch = useAppDispatch();
-
-  const productsInCart = products.filter((product) => cart[product.sku]);
+  const productsInCart = useAppSelector(selectProductsInCart);
 
   return (
     <ScrollView>
