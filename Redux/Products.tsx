@@ -1,13 +1,6 @@
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  Button,
-} from "react-native";
+import { ScrollView, SafeAreaView } from "react-native";
 
-import styles from "../styles";
+import { ProductCard } from "../shared/ProductCard";
 import {
   useAppSelector,
   addToCart,
@@ -24,27 +17,13 @@ export const Products = () => {
     <ScrollView>
       <SafeAreaView>
         {products.map((product) => (
-          <View key={product.sku} style={styles.card}>
-            <Image
-              source={{ uri: product.image }}
-              resizeMode="contain"
-              style={styles.image}
-            />
-            <View style={styles.row}>
-              <Text>{product.name}</Text>
-              {cart[product.sku] ? (
-                <Button
-                  title="Remove from Cart"
-                  onPress={() => dispatch(removeFromCart(product.sku))}
-                />
-              ) : (
-                <Button
-                  title="Add to Cart"
-                  onPress={() => dispatch(addToCart(product.sku))}
-                />
-              )}
-            </View>
-          </View>
+          <ProductCard
+            key={product.sku}
+            {...product}
+            isInCart={cart[product.sku] !== undefined}
+            onRemove={() => dispatch(removeFromCart(product.sku))}
+            onAdd={() => dispatch(addToCart(product.sku))}
+          />
         ))}
       </SafeAreaView>
     </ScrollView>

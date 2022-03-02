@@ -1,15 +1,8 @@
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  SafeAreaView,
-  Button,
-} from "react-native";
+import { ScrollView, SafeAreaView } from "react-native";
 import { observer } from "mobx-react-lite";
 
-import styles from "../styles";
 import { useCart } from "./store";
+import { ProductCard } from "../shared/ProductCard";
 
 export const Products = observer(() => {
   const { products, cart, addToCart, removeFromCart } = useCart();
@@ -18,27 +11,13 @@ export const Products = observer(() => {
     <ScrollView>
       <SafeAreaView>
         {products.map((product) => (
-          <View key={product.sku} style={styles.card}>
-            <Image
-              source={{ uri: product.image }}
-              resizeMode="contain"
-              style={styles.image}
-            />
-            <View style={styles.row}>
-              <Text>{product.name}</Text>
-              {cart.get(product.sku) ? (
-                <Button
-                  title="Remove from Cart"
-                  onPress={() => removeFromCart(product.sku)}
-                />
-              ) : (
-                <Button
-                  title="Add to Cart"
-                  onPress={() => addToCart(product.sku)}
-                />
-              )}
-            </View>
-          </View>
+          <ProductCard
+            key={product.sku}
+            {...product}
+            isInCart={cart.get(product.sku) !== undefined}
+            onRemove={removeFromCart}
+            onAdd={addToCart}
+          />
         ))}
       </SafeAreaView>
     </ScrollView>
