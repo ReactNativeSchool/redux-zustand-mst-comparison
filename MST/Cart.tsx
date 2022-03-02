@@ -5,9 +5,7 @@ import styles from "../styles";
 import { useCart } from "./store";
 
 export const Cart = observer(() => {
-  const { products, cart, removeFromCart } = useCart();
-
-  const productsInCart = products.filter((product) => cart.get(product.sku));
+  const { productsInCart, removeFromCart } = useCart();
 
   return (
     <ScrollView>

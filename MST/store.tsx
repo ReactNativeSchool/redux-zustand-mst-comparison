@@ -18,6 +18,11 @@ const CartStore = types
     removeFromCart(sku: string) {
       store.cart.delete(sku);
     },
+  }))
+  .views((self) => ({
+    get productsInCart() {
+      return self.products.filter((product) => self.cart.get(product.sku));
+    },
   }));
 
 type CartStoreType = Instance<typeof CartStore>;
