@@ -9,8 +9,8 @@ import {
 } from "./store";
 
 export const Products = () => {
-  const products = useAppSelector((state) => state.cart.products);
-  const cart = useAppSelector((state) => state.cart.cart);
+  const products = useAppSelector((state) => state.products);
+  const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   return (
